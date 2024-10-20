@@ -32,7 +32,7 @@ func TestTimedMapGetNonExistentKey(t *testing.T) {
 func TestTimedMapGetExpiredKey(t *testing.T) {
 	tm := New[string, int]()
 	tm.Put("key", 19, 100*time.Millisecond)
-	time.Sleep(time.Second)
+	time.Sleep(200 * time.Millisecond)
 	_, ok := tm.Get("key")
 	if ok {
 		t.Errorf("expected ok to be false")
@@ -96,9 +96,9 @@ func TestTimedMapClear(t *testing.T) {
 
 func TestTimedMapExpiration(t *testing.T) {
 	tm := New[string, int]()
-	tm.Put("key1", 19, 3*time.Second)
-	tm.Put("key2", 23, time.Second)
-	time.Sleep(2 * time.Second)
+	tm.Put("key1", 19, 300*time.Millisecond)
+	tm.Put("key2", 23, 100*time.Millisecond)
+	time.Sleep(200 * time.Millisecond)
 	_, ok := tm.Get("key1")
 	if !ok {
 		t.Errorf("expected key1 to still be present")
@@ -110,9 +110,9 @@ func TestTimedMapExpiration(t *testing.T) {
 }
 
 func TestTimedMapCleanup(t *testing.T) {
-	tm := NewWithCleanupInterval[string, int](2 * time.Second)
-	tm.Put("key", 19, time.Second)
-	time.Sleep(3 * time.Second)
+	tm := NewWithCleanupInterval[string, int](200 * time.Millisecond)
+	tm.Put("key", 19, 100*time.Millisecond)
+	time.Sleep(300 * time.Millisecond)
 	_, ok := tm.Get("key")
 	if ok {
 		t.Errorf("expected key to be cleaned up and removed")
