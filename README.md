@@ -11,7 +11,7 @@
 The `TimedMap` library provides the following API:
 
 *   `New[K, V]()` - Creates a new `TimedMap` with the default cleanup interval of 1 minute.
-*   `NewWithCleanupInterval[K, V]()` - Creates a new `TimedMap` with the given cleanup interval.
+*   `NewWithCleanupInterval[K, V](interval time.Duration)` - Creates a new `TimedMap` with the given cleanup interval.
 *   `Put(key K, value V, ttl time.Duration)` - Adds a value and its time-to-live duration to the `TimedMap` for the given key.
 *   `Get(key K) (V, bool)` - Returns the value associated with the given key and a boolean indicating if the key exists.
 *   `Delete(key K)` - Removes the value associated with the given key regardless of its expiration time.
