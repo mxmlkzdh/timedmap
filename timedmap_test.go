@@ -1,7 +1,6 @@
 package timedmap
 
 import (
-	"fmt"
 	"sync"
 	"testing"
 	"time"
@@ -120,7 +119,7 @@ func TestTimedMapCleanup(t *testing.T) {
 }
 
 func TestTimedMapConcurrency(t *testing.T) {
-	m := New[string, string]()
+	m := New[string, int]()
 	var wg sync.WaitGroup
 	// Launch multiple goroutines to simulate concurrent access
 	for i := 0; i < 100; i++ {
@@ -129,14 +128,14 @@ func TestTimedMapConcurrency(t *testing.T) {
 			defer wg.Done()
 			// Alternate between put and get operations
 			if i%2 == 0 {
-				m.Put("key", fmt.Sprintf("%d", i), time.Second)
+				m.Put("key", i, time.Second)
 			} else {
 				_, _ = m.Get("key")
 			}
 		}(i)
 	}
 	wg.Wait()
-	if value, ok := m.Get("key"); !ok || value == "" {
+	if value, ok := m.Get("key"); !ok || value == 0 {
 		t.Errorf("expected value to exist for key, but it was missing")
 	}
 }
