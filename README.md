@@ -1,4 +1,6 @@
 # TimedMap
+[![Go Workflow](https://github.com/mxmlkzdh/timedmap/actions/workflows/go.yml/badge.svg)](https://github.com/mxmlkzdh/timedmap/actions)
+
 `TimedMap` is a thread-safe, generic map that automatically removes expired entries. It is designed to be used for caching scenarios where data is only valid for a limited time and needs to be automatically purged after expiration.
 
 ## Features
