@@ -52,23 +52,23 @@ func TestTimedMapPutSameKeyMultipleTimes(t *testing.T) {
 func TestTimedMapDeleteNonExistentKey(t *testing.T) {
 	tm := New[string, int]()
 	tm.Delete("non-existent-key")
-	if tm.Len() != 0 {
-		t.Errorf("expected length 0, got %d", tm.Len())
+	if tm.Size() != 0 {
+		t.Errorf("expected size 0, got %d", tm.Size())
 	}
 }
 
-func TestTimedMapLen(t *testing.T) {
+func TestTimedMapSize(t *testing.T) {
 	tm := New[string, int]()
-	if tm.Len() != 0 {
-		t.Errorf("expected length 0, got %d", tm.Len())
+	if tm.Size() != 0 {
+		t.Errorf("expected size 0, got %d", tm.Size())
 	}
 	tm.Put("key", 19, time.Second)
-	if tm.Len() != 1 {
-		t.Errorf("expected length 1, got %d", tm.Len())
+	if tm.Size() != 1 {
+		t.Errorf("expected size 1, got %d", tm.Size())
 	}
 	tm.Delete("key")
-	if tm.Len() != 0 {
-		t.Errorf("expected length 0, got %d", tm.Len())
+	if tm.Size() != 0 {
+		t.Errorf("expected size 0, got %d", tm.Size())
 	}
 }
 
@@ -89,8 +89,8 @@ func TestTimedMapClear(t *testing.T) {
 	tm.Put("key1", 19, time.Second)
 	tm.Put("key2", 23, time.Second)
 	tm.Clear()
-	if tm.Len() != 0 {
-		t.Errorf("expected length 0, got %d", tm.Len())
+	if tm.Size() != 0 {
+		t.Errorf("expected size 0, got %d", tm.Size())
 	}
 }
 

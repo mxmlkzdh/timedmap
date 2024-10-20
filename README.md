@@ -18,7 +18,7 @@ The `TimedMap` library provides the following API:
 *   `Get(key K) (V, bool)` - Returns the value associated with the given key and a boolean indicating if the key exists.
 *   `Delete(key K)` - Removes the value associated with the given key regardless of its expiration time.
 *   `Clear()` - Removes all entries from the `TimedMap`.
-*   `Len() int` - Returns the number of entries in the `TimedMap`.
+*   `Size() int` - Returns the number of entries in the `TimedMap`.
 
 ## Example
 

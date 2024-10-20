@@ -79,8 +79,8 @@ func (tm *TimedMap[K, V]) Clear() {
 	clear(tm.store)
 }
 
-// Len returns the number of entries in the [TimedMap].
-func (tm *TimedMap[K, V]) Len() int {
+// Size returns the number of entries in the [TimedMap].
+func (tm *TimedMap[K, V]) Size() int {
 	tm.mu.RLock()
 	defer tm.mu.RUnlock()
 	return len(tm.store)
