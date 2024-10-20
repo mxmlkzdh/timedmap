@@ -75,7 +75,7 @@ Then import it in your Go code:
 import "github.com/mxmlkzdh/timedmap"
 ```
 
-## Thread-Safety
+## Thread Safety
 `TimedMap` is designed to be used concurrently from multiple goroutines. It uses `sync.RWMutex` to provide safe access for both readers and writers.
 - **Concurrent Reads**: Multiple goroutines can safely read from the map simultaneously.
 - **Concurrent Writes**: Writes (setting or deleting entries) are synchronized, ensuring that the map's state remains consistent.
