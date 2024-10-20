@@ -57,6 +57,14 @@ func (tm *TimedMap[K, V]) Get(key K) (V, bool) {
 	return e.value, true
 }
 
+// Contains returns true if the [TimedMap] contains the given key, false otherwise.
+func (tm *TimedMap[K, V]) Contains(key K) bool {
+	tm.mu.RLock()
+	defer tm.mu.RUnlock()
+	_, ok := tm.store[key]
+	return ok
+}
+
 // Delete removes the value associated with the given key regardless of its expiration time.
 func (tm *TimedMap[K, V]) Delete(key K) {
 	tm.mu.Lock()

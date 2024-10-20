@@ -72,6 +72,18 @@ func TestTimedMapLen(t *testing.T) {
 	}
 }
 
+func TestTimedMapContains(t *testing.T) {
+	tm := New[string, int]()
+	tm.Put("key", 19, time.Second)
+	if !tm.Contains("key") {
+		t.Errorf("expected key to be present")
+	}
+	tm.Delete("key")
+	if tm.Contains("key") {
+		t.Errorf("expected key to be removed")
+	}
+}
+
 func TestTimedMapClear(t *testing.T) {
 	tm := New[string, int]()
 	tm.Put("key1", 19, time.Second)
