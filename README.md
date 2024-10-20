@@ -36,8 +36,8 @@ func main() {
     tm := timedmap.NewWithCleanupInterval[string, string](30 * time.Second)
 
     // Add entries
-    tm.Set("key1", "value1", 10*time.Second)  // This entry will expire in 10 seconds
-    tm.Set("key2", "value2", 1*time.Minute)   // This entry will expire in 1 minute
+    tm.Put("key1", "value1", 10*time.Second)  // This entry will expire in 10 seconds
+    tm.Put("key2", "value2", 1*time.Minute)   // This entry will expire in 1 minute
 
     // Fetch values
     value, ok := tm.Get("key1")
