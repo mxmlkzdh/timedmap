@@ -52,8 +52,8 @@ func main() {
     // Delete an entry
     tm.Delete("key2")
 
-    // Get the map length
-    fmt.Println("Map size:", tm.Len())
+    // Get the map size
+    fmt.Println("Map size:", tm.Size())
 
     // Wait for expiration
     time.Sleep(11 * time.Second)
