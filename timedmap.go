@@ -10,6 +10,7 @@ import (
 // This implementation uses a [sync.RWMutex] to synchronize access to the map and hence is thread-safe.
 type TimedMap[K comparable, V any] struct {
 	mu    sync.RWMutex
+	t     *time.Ticker
 	i     time.Duration
 	store map[K]*entry[V]
 }
@@ -22,6 +23,7 @@ func New[K comparable, V any]() *TimedMap[K, V] {
 // NewWithCleanupInterval creates a new [TimedMap] with the given cleanup interval.
 func NewWithCleanupInterval[K comparable, V any](interval time.Duration) *TimedMap[K, V] {
 	tm := &TimedMap[K, V]{
+		t:     time.NewTicker(interval),
 		i:     interval,
 		store: make(map[K]*entry[V]),
 	}
@@ -93,8 +95,7 @@ type entry[V any] struct {
 
 // cleanup removes expired entries from the [TimedMap]. It runs in a separate goroutine.
 func (tm *TimedMap[K, V]) cleanup() {
-	for {
-		time.Sleep(tm.i)
+	for range tm.t.C {
 		tm.mu.Lock()
 		now := time.Now()
 		for k, e := range tm.store {
