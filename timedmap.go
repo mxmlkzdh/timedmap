@@ -15,13 +15,8 @@ type TimedMap[K comparable, V any] struct {
 	store map[K]*entry[V]
 }
 
-// New creates a new [TimedMap] with the default cleanup interval of 1 minute.
-func New[K comparable, V any]() *TimedMap[K, V] {
-	return NewWithCleanupInterval[K, V](time.Minute)
-}
-
-// NewWithCleanupInterval creates a new [TimedMap] with the given cleanup interval.
-func NewWithCleanupInterval[K comparable, V any](interval time.Duration) *TimedMap[K, V] {
+// New creates a new [TimedMap] with the given cleanup interval.
+func New[K comparable, V any](interval time.Duration) *TimedMap[K, V] {
 	tm := &TimedMap[K, V]{
 		t:     time.NewTicker(interval),
 		i:     interval,
